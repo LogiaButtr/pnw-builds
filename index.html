@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Build calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: rgb(0, 0, 0, 1); 
+      color: #f0f0f0; 
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: 10px; 
+      width: 400px;
+    }
+
+    label {
+      text-align: left; 
+    }
+
+    input[type="number"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      width: 100px; 
+      text-align: right; 
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      grid-column: 1 / span 2; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Build calculator</h1>
+
+  <form id="jsonForm">
+
+    <label for="imp_windpower">imp_windpower:</label>
+    <input type="number" id="imp_windpower" value="0">
+
+    <label for="imp_nuclearpower">imp_nuclearpower:</label>
+    <input type="number" id="imp_nuclearpower" value="0">
+
+    <label for="imp_coalmine">imp_coalmine:</label>
+    <input type="number" id="imp_coalmine" value="0" max="10">
+
+    <label for="imp_oilwell">imp_oilwell:</label>
+    <input type="number" id="imp_oilwell" value="0" max="10">
+
+    <label for="imp_uramine">imp_uramine:</label>
+    <input type="number" id="imp_uramine" value="0" max="5">
+
+    <label for="imp_leadmine">imp_leadmine:</label>
+    <input type="number" id="imp_leadmine" value="0" max="10">
+
+    <label for="imp_ironmine">imp_ironmine:</label>
+    <input type="number" id="imp_ironmine" value="0" max="10">
+
+    <label for="imp_bauxitemine">imp_bauxitemine:</label>
+    <input type="number" id="imp_bauxitemine" value="0" max="10">
+
+    <label for="imp_farm">imp_farm:</label>
+    <input type="number" id="imp_farm" value="0" max="20">
+
+    <label for="imp_gasrefinery">imp_gasrefinery:</label>
+    <input type="number" id="imp_gasrefinery" value="0" max="5">
+
+    <label for="imp_aluminumrefinery">imp_aluminumrefinery:</label>
+    <input type="number" id="imp_aluminumrefinery" value="0" max="5">
+
+    <label for="imp_munitionsfactory">imp_munitionsfactory:</label>
+    <input type="number" id="imp_munitionsfactory" value="0" max="5">
+
+    <label for="imp_steelmill">imp_steelmill:</label>
+    <input type="number" id="imp_steelmill" value="0" max="5">
+
+    <label for="imp_policestation">imp_policestation:</label>
+    <input type="number" id="imp_policestation" value="0" max="5">
+
+    <label for="imp_hospital">imp_hospital:</label>
+    <input type="number" id="imp_hospital" value="0" max="5"> 
+
+    <label for="imp_recyclingcenter">imp_recyclingcenter:</label>
+    <input type="number" id="imp_recyclingcenter" value="0" max="3">
+
+    <label for="imp_subway">imp_subway:</label>
+    <input type="number" id="imp_subway" value="0" max="1">
+
+    <label for="imp_supermarket">imp_supermarket:</label>
+    <input type="number" id="imp_supermarket" value="0" max="6">
+
+    <label for="imp_bank">imp_bank:</label>
+    <input type="number" id="imp_bank" value="0" max="5">
+
+    <label for="imp_mall">imp_mall:</label>
+    <input type="number" id="imp_mall" value="0" max="4">
+
+    <label for="imp_stadium">imp_stadium:</label>
+    <input type="number" id="imp_stadium" value="0" max="3">
+
+    <label for="imp_barracks">imp_barracks:</label>
+    <input type="number" id="imp_barracks" value="0" max="5">
+
+    <label for="imp_factory">imp_factory:</label>
+    <input type="number" id="imp_factory" value="0" max="5">
+
+    <label for="imp_hangars">imp_hangars:</label>
+    <input type="number" id="imp_hangars" value="0" max="5">
+
+    <label for="imp_drydock">imp_drydock:</label>
+    <input type="number" id="imp_drydock" value="0" max="3">
+
+    <label for="imp_total">imp_total:</label>
+    <input type="number" id="imp_total" value="0" readonly>
+
+    <label for="infra_needed">infra_needed:</label>
+    <input type="number" id="infra_needed" value="0" readonly>
+
+    <button type="button" id="updateButton" onclick="updateJSON()">Make build</button>
+  </form>
+
+  <pre id="jsonOutput"></pre>
+
+  <script>
+    const initialJSON = {
+      "infra_needed": 0,
+      "imp_total": 0,
+      "imp_coalpower": 0,
+      "imp_oilpower": 0,
+      "imp_windpower": 0,
+      "imp_nuclearpower": 0,
+      "imp_coalmine": 0,
+      "imp_oilwell": 0,
+      "imp_uramine": 0,
+      "imp_leadmine": 0,
+      "imp_ironmine": 0,
+      "imp_bauxitemine": 0,
+      "imp_farm": 0,
+      "imp_gasrefinery": 0,
+      "imp_aluminumrefinery": 0,
+      "imp_munitionsfactory": 0,
+      "imp_steelmill": 0,
+      "imp_policestation": 0,
+      "imp_hospital": 0,
+      "imp_recyclingcenter": 0,
+      "imp_subway": 0,
+      "imp_supermarket": 0,
+      "imp_bank": 0,
+      "imp_mall": 0,
+      "imp_stadium": 0,
+      "imp_barracks": 0,
+      "imp_factory": 0,
+      "imp_hangars": 0,
+      "imp_drydock": 0
+    };
+
+    function updateJSON() {
+      const updatedJSON = {};
+      document.querySelectorAll("#jsonForm input").forEach(input => {
+        updatedJSON[input.id] = parseInt(input.value);
+      });
+
+      updatedJSON["imp_total"] = updatedJSON["imp_windpower"] + updatedJSON["imp_nuclearpower"] + updatedJSON["imp_coalmine"] + updatedJSON["imp_oilwell"] + updatedJSON["imp_uramine"] + updatedJSON["imp_leadmine"] + updatedJSON["imp_ironmine"] + updatedJSON["imp_bauxitemine"] + updatedJSON["imp_farm"] + updatedJSON["imp_gasrefinery"] + updatedJSON["imp_aluminumrefinery"] + updatedJSON["imp_munitionsfactory"] + updatedJSON["imp_steelmill"] + updatedJSON["imp_policestation"] + updatedJSON["imp_hospital"] + updatedJSON["imp_recyclingcenter"] + updatedJSON["imp_subway"] + updatedJSON["imp_supermarket"] + updatedJSON["imp_bank"] + updatedJSON["imp_mall"] + updatedJSON["imp_stadium"] + updatedJSON["imp_barracks"] + updatedJSON["imp_factory"] + updatedJSON["imp_hangars"] + updatedJSON["imp_drydock"]
+
+      updatedJSON["infra_needed"] = updatedJSON["imp_total"] * 50; 
+
+      const impTotalInput = document.getElementById("imp_total");
+      impTotalInput.value = updatedJSON["imp_total"]; 
+
+      const infraNeededInput = document.getElementById("infra_needed");
+      infraNeededInput.value = updatedJSON["infra_needed"];
+
+      document.getElementById("jsonOutput").textContent = JSON.stringify(updatedJSON, null, 2);
+    }
+  </script>
+</body>
+</html>
