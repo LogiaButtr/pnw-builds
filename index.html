@@ -45,9 +45,6 @@
   <h1>Build calculator</h1>
 
   <form id="jsonForm">
-
-    <label for="land">land:</label>
-    <input type="number" id="land" value="0" min="0">
     
     <label for="imp_windpower">imp_windpower:</label>
     <input type="number" id="imp_windpower" value="0" min="0">
@@ -131,7 +128,7 @@
     <input type="number" id="infra_needed" value="0" readonly>
 
     <label for="diseaseDisplay">Disease:</label>
-    <div id="diseaseDisplay" style="font-weight: bold; margin-bottom: 10px;">Disease: 0</div>
+    <div id="diseaseDisplay" style="font-weight: bold; margin-bottom: 10px;">0 (assuming land is 500 more than infra)</div>
 
     <button type="button" id="updateButton" onclick="updateJSON()">Make build</button>
   </form>
@@ -158,7 +155,7 @@
 
     const landValue = parseInt(document.getElementById("land").value); // Get the value of 'land' input
 
-    const disease = (((((updatedJSON["infra_needed"] * 100) / landValue) ** 2) * 0.01) - 25) / 100 +
+    const disease = (((((updatedJSON["infra_needed"] * 100) / (updatedJSON["infra_needed"] + 500)) ** 2) * 0.01) - 25) / 100 +
                       ((updatedJSON["infra_needed"] * 100) / 100000) +
                       ((((updatedJSON["imp_mall"] * 2) + 
                          (updatedJSON["imp_stadium"] * 5) + 
