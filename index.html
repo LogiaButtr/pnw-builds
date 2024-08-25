@@ -138,46 +138,8 @@
 
   <pre id="jsonOutput"></pre>
 
-  <script>
-  function updateJSON() {
-    const updatedJSON = {};
-    document.querySelectorAll("#jsonForm input").forEach(input => {
-      updatedJSON[input.id] = parseInt(input.value);
-    });
-
-    updatedJSON["imp_total"] = updatedJSON["imp_windpower"] + updatedJSON["imp_nuclearpower"] + updatedJSON["imp_coalmine"] + updatedJSON["imp_oilwell"] + updatedJSON["imp_uramine"] + updatedJSON["imp_leadmine"] + updatedJSON["imp_ironmine"] + updatedJSON["imp_bauxitemine"] + updatedJSON["imp_farm"] + updatedJSON["imp_gasrefinery"] + updatedJSON["imp_aluminumrefinery"] + updatedJSON["imp_munitionsfactory"] + updatedJSON["imp_steelmill"] + updatedJSON["imp_policestation"] + updatedJSON["imp_hospital"] + updatedJSON["imp_recyclingcenter"] + updatedJSON["imp_subway"] + updatedJSON["imp_supermarket"] + updatedJSON["imp_bank"] + updatedJSON["imp_mall"] + updatedJSON["imp_stadium"] + updatedJSON["imp_barracks"] + updatedJSON["imp_factory"] + updatedJSON["imp_hangars"] + updatedJSON["imp_drydock"];
-
-    updatedJSON["infra_needed"] = updatedJSON["imp_total"] * 50;
-
-    const impTotalInput = document.getElementById("imp_total");
-    impTotalInput.value = updatedJSON["imp_total"];
-
-    const infraNeededInput = document.getElementById("infra_needed");
-    infraNeededInput.value = updatedJSON["infra_needed"];
-
-    const landValue = parseInt(document.getElementById("land").value); // Get the value of 'land' input
-
-    const pollution = (((((updatedJSON["infra_needed"] * 100) / landValue) ** 2) * 0.01) - 25) / 100 +
-                      ((updatedJSON["infra_needed"] * 100) / 100000) +
-                      ((((updatedJSON["imp_mall"] * 2) + 
-                         (updatedJSON["imp_stadium"] * 5) + 
-                         (updatedJSON["imp_policestation"] * 1) + 
-                         (updatedJSON["imp_hospital"] * 4) + 
-                         (updatedJSON["imp_gasrefinery"] * 32) + 
-                         (updatedJSON["imp_aluminumrefinery"] * 40) + 
-                         (updatedJSON["imp_munitionsfactory"] * 32) + 
-                         (updatedJSON["imp_steelmill"] * 40) + 
-                         ((updatedJSON["imp_coalmine"] + 
-                           updatedJSON["imp_oilwell"] + 
-                           updatedJSON["imp_leadmine"] + 
-                           updatedJSON["imp_ironmine"] + 
-                           updatedJSON["imp_bauxitemine"]) * 12) + 
-                         (updatedJSON["imp_uramine"] * 20) + 
-                         updatedJSON["imp_farm"] * 2) * 0.05)) - 
-                      (updatedJSON["imp_hospital"] * 2.5);
-
-    
-    <script>
+  
+<script>
   function updateJSON() {
     const updatedJSON = {};
     document.querySelectorAll("#jsonForm input").forEach(input => {
