@@ -126,10 +126,7 @@
 
     <label for="infra_needed">infra_needed:</label>
     <input type="number" id="infra_needed" value="0" readonly>
-
-    <label for="diseaseDisplay">Disease:</label>
-    <div id="diseaseDisplay" style="font-weight: bold; margin-bottom: 10px;">0 (assuming land is 500 more than infra)</div>
-
+  
     <button type="button" id="updateButton" onclick="updateJSON()">Make build</button>
   </form>
 
@@ -155,35 +152,7 @@
 
     const landValue = parseInt(document.getElementById("land").value); // Get the value of 'land' input
 
-    const disease = (((((updatedJSON["infra_needed"] * 100) / (updatedJSON["infra_needed"] + 500)) ** 2) * 0.01) - 25) / 100 +
-                      ((updatedJSON["infra_needed"] * 100) / 100000) +
-                      ((((updatedJSON["imp_mall"] * 2) + 
-                         (updatedJSON["imp_stadium"] * 5) + 
-                         (updatedJSON["imp_policestation"] * 1) + 
-                         (updatedJSON["imp_hospital"] * 4) + 
-                         (updatedJSON["imp_gasrefinery"] * 32) + 
-                         (updatedJSON["imp_aluminumrefinery"] * 40) + 
-                         (updatedJSON["imp_munitionsfactory"] * 32) + 
-                         (updatedJSON["imp_steelmill"] * 40) + 
-                         ((updatedJSON["imp_coalmine"] + 
-                           updatedJSON["imp_oilwell"] + 
-                           updatedJSON["imp_leadmine"] + 
-                           updatedJSON["imp_ironmine"] + 
-                           updatedJSON["imp_bauxitemine"]) * 12) + 
-                         (updatedJSON["imp_uramine"] * 20) + 
-                         updatedJSON["imp_farm"] * 2) * 0.05)) - 
-                      (updatedJSON["imp_hospital"] * 2.5);
-
-
-    // Update the pollution display
-    const diseaseDisplay = document.getElementById("diseaseDisplay");
-    diseaseDisplay.textContent = disease;
     
-    if (disease > 3) {
-      diseaseDisplay.style.color = "red";
-    } else {
-      diseaseDisplay.style.color = "green"; // Default color (inherited)
-    }
 
     document.getElementById("jsonOutput").textContent = JSON.stringify(updatedJSON, null, 2);
   }
